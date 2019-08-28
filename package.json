@@ -17,6 +17,5 @@
   },
   "homepage": "https://github.com/jaynav1/ptv-experiment#readme",
   "dependencies": {
-    "node-fetch": "^2.6.0"
   }
 }
