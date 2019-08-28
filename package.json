@@ -17,5 +17,6 @@
   },
   "homepage": "https://github.com/jaynav1/ptv-experiment#readme",
   "dependencies": {
+    "ptv-api": "^0.1.0"
   }
 }
