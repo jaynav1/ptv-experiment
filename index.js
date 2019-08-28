@@ -8,18 +8,12 @@ const app = express()
 app.get('/', (req, res) => {
     ptvClient = ptv(config.userid, config.apikey)
     ptvClient.then(apis => {
-        return apis.Routes.Routes_OneOrMoreRoutes({ route_types: '0' })
+        return apis.Departures.Departures_GetForStop({ route_types: '0' })
     }).then(resp => {
         data = resp.body
+        console.log(data)
         status = data.status
-        routes = data.routes
         sitebody = []
-        console.log(`Health is (1 = good) : ${status.health}`)
-        console.log(routes)
-        routes.forEach(function(route) {
-            route_service_status = route.route_service_status
-            sitebody.push([`Service: ${route.route_name}, Status: ${route_service_status.description}`])
-        })
         res.send(sitebody)
     }).catch(console.error)
 })
