@@ -1,0 +1,19 @@
+{
+  "name": "ptv-experiment",
+  "version": "1.0.0",
+  "description": "using ptv api experiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaynav1/ptv-experiment.git"
+  },
+  "author": "Jaylen Navurunnage",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaynav1/ptv-experiment/issues"
+  },
+  "homepage": "https://github.com/jaynav1/ptv-experiment#readme"
+}
