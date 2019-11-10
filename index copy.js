@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
         console.log(routes)
         routes.forEach(function(route) {
             route_service_status = route.route_service_status
-            sitebody.push([`Service: ${route.route_name}, Status: ${route_service_status.description}`])
+            sitebody.push(`Service: ${route.route_name} `+`Status: ${route_service_status.description}`)
         })
         res.send(sitebody)
     }).catch(console.error)

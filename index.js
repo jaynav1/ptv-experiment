@@ -1,41 +1,22 @@
+const fs = require('fs')
 const ptv = require('ptv-api')
 const config = require('./config.json')
 const express = require('express')
 const app = express()
 
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+
+const getService = require(`./commands/getService.js`)
+
 stop = '1078'
 
 app.get('/', (req, res) => {
-    ptvClient = ptv(config.userid, config.apikey)
-    ptvClient.then(apis => {
-        return apis.Departures.Departures_GetForStop({ route_type: '0', stop_id: stop, max_results: '5', expand: 'routes' })
-    }).then(resp => {
-        data = resp.body
-        console.log(data)
-        departures = data.departures
-        routeid = departures[0].route_id
-        routename = "Glen Waverley"
-        console.log(departures)
-        status = data.status
-        sitebody =`Departures from ${routename} Station:  `
-        departures.forEach(route => {
-            sch = new Date(route.scheduled_departure_utc).toTimeString().slice(0,5)
-            now = new Date()
-            eststring = ""
-            if (route.estimated_departure_utc != null) {
-                est = new Date(route.estimated_departure_utc)
-                diff = est - now
-                if (diff > 60e3) console.log(
-                    diff = Math.floor(diff / 60e3)
-                )
-                eststring = eststring.concat(" and is departing in ", diff, " minutes")
-            }
-            plat = route.platform_number
-            sitebody = sitebody.concat("The ", sch, " train is on Platform ", plat, eststring, '. ')
-
-        })
-        res.send(sitebody)
-    }).catch(console.error)
+    try {
+        getService.execute(stop, req, res)
+	} catch (error) {
+		console.error(error)
+    }
+    
 })
 
 const server = app.listen(3000, () => {
